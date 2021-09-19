@@ -8,8 +8,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
 
-import static android.view.GestureDetector.*;
-
 
 public class MainActivity extends AppCompatActivity {
     TextView textView = null;
@@ -19,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        textView = (TextView) findViewById(R.id.log);
+        textView = findViewById(R.id.log);
 
         View view = findViewById(R.id.view);
         view.setOnTouchListener(new View.OnTouchListener() {
@@ -29,41 +27,51 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+
         gestureDetector = new GestureDetector(this, new GestureDetector.OnGestureListener() {
             @Override
             public boolean onDown(MotionEvent motionEvent) {
-                textView.append("onDown Call" + "\n");
+                println("onDown Call" + "\n");
                 return true;
             }
 
             @Override
             public void onShowPress(MotionEvent motionEvent) {
-                textView.append("onShowPress Call" + "\n");
+                println("onShowPress Call" + "\n");
             }
 
             @Override
             public boolean onSingleTapUp(MotionEvent motionEvent) {
-                textView.append("onSingleTapUp Call" + "\n");
+                println("onSingleTapUp Call" + "\n");
                 return true;
             }
 
             @Override
             public boolean onScroll(MotionEvent motionEvent, MotionEvent motionEvent1, float v, float v1) {
-                textView.append("onScroll Call (" + v + " * " + v1 + ")" + "\n");
+                println("onScroll Call (" + v + " * " + v1 + ")" + "\n");
                 return true;
             }
 
             @Override
             public void onLongPress(MotionEvent motionEvent) {
-                textView.append("onLongPress Call" + "\n");
+                println("onLongPress Call" + "\n");
             }
 
             @Override
             public boolean onFling(MotionEvent motionEvent, MotionEvent motionEvent1, float v, float v1) {
-                textView.append("onFling Call (" + v + " * " + v1 + ")" + "\n");
+                println("onFling Call (" + v + " * " + v1 + ")" + "\n");
                 return true;
             }
         });
+
+
+
     }
+
+    public void println(String data){
+        textView.append(data + "/n");
+    }
+
+
 }
 
